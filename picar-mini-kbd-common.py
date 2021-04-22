@@ -15,6 +15,8 @@ import local_common as cm
 
 import input_kbd
 
+from subprocess import call
+
 ##########################################################
 # import deeppicar's sensor/actuator modules
 ##########################################################
@@ -62,6 +64,18 @@ def turn_off():
     keyfile.close()
     keyfile_btn.close()
     vidfile.release()
+
+def goLeft():
+    actuator.left()
+    call("python3 sendDirections.py left", shell=True)
+
+def goRight():
+    actuator.right()
+    call("python3 sendDirections.py right", shell=True)
+
+def goCenter():
+    actuator.center()
+    call("python3 sendDirections.py center", shell=True)
 
 ##########################################################
 # program begins
@@ -147,17 +161,17 @@ while True:
         ch = ord(input_kbd.read_single_keypress())
 
     if ch == ord('j'):
-        actuator.left()
+        goLeft()
         print ("left")
         angle = deg2rad(-30)
         btn   = ord('j')
     elif ch == ord('k'):
-        actuator.center()
+        goCenter()
         print ("center")
         angle = deg2rad(0)
         btn   = ord('k')
     elif ch == ord('l'):
-        actuator.right()
+        goRight()
         print ("right")
         angle = deg2rad(30)
         btn   = ord('l')
@@ -200,15 +214,15 @@ while True:
 
         degree = rad2deg(angle)
         if degree < 15 and degree > -15:
-            actuator.center()
+            goCenter()
             car_angle = 0
             btn = ord('k')
         elif degree >= 15:
-            actuator.right()
+            goRight()
             car_angle = 30
             btn = ord('l')
         elif degree <= -15:
-            actuator.left()
+            goLeft()
             car_angle = -30
             btn = ord('j')
 
