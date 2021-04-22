@@ -1,3 +1,3 @@
 #!/bin/bash
-sudo cp takeDirections.py /usr/bin/takeDirections.py &&
-sudo chmod +x /usr/bin/takeDirections.py
+sudo cp takeDirection.py /usr/bin/takeDirection.py &&
+sudo chmod +x /usr/bin/takeDirection.py
