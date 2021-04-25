@@ -30,7 +30,7 @@ try:
         if not data:
             break
         print("Received", data)
-        command = "takeDirection.py " + data
+        command = "takeDirection.py " + data.decode("utf-8")
         process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
 except OSError:
