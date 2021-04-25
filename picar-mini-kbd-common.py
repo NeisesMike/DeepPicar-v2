@@ -16,6 +16,9 @@ import local_common as cm
 import input_kbd
 
 from subprocess import call
+import bluetooth
+sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+sock.connect(("B8:27:EB:EC:85:F0", 1))
 
 ##########################################################
 # import deeppicar's sensor/actuator modules
@@ -67,15 +70,18 @@ def turn_off():
 
 def goLeft():
     actuator.left()
-    call("python3 sendDirections.py left", shell=True)
+    sock.send("left")
+    #call("python3 sendDirections.py left", shell=True)
 
 def goRight():
     actuator.right()
-    call("python3 sendDirections.py right", shell=True)
+    sock.send("right")
+    #call("python3 sendDirections.py right", shell=True)
 
 def goCenter():
     actuator.center()
-    call("python3 sendDirections.py center", shell=True)
+    sock.send("center")
+    #call("python3 sendDirections.py center", shell=True)
 
 ##########################################################
 # program begins
@@ -266,3 +272,4 @@ while True:
 
 print ("Finish..")
 turn_off()
+sock.close()
