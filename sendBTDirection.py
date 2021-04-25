@@ -49,7 +49,7 @@ sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
 sock.connect((host, port))
 
 stamp3 = time.time()
-sock.send("left")
+sock.send(direction)
 
 stamp4 = time.time()
 
