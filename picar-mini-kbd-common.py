@@ -83,6 +83,18 @@ def goCenter():
     sock.send("center")
     #call("python3 sendDirections.py center", shell=True)
 
+def goForward():
+    actuator.ffw()
+    sock.send("forward")
+
+def goBackward():
+    actuator.rew()
+    sock.send("backward")
+
+def goStop():
+    actuator.stop()
+    sock.send("stop")
+
 ##########################################################
 # program begins
 ##########################################################
@@ -182,14 +194,14 @@ while True:
         angle = deg2rad(30)
         btn   = ord('l')
     elif ch == ord('a'):
-        actuator.ffw()
+        goForward()
         print ("accel")
     elif ch == ord('s'):
-        actuator.stop()
+        goStop()
         print ("stop")
         btn   = ch
     elif ch == ord('z'):
-        actuator.rew()
+        goBackward()
         print ("reverse")
     elif ch == ord('q'):
         break
